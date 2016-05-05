@@ -1,6 +1,10 @@
 #pragma once
 #include <string>
+#include <fstream>
+#include <iostream>
+
 using namespace std;
+
 class Planet
 {
 public:
@@ -8,8 +12,10 @@ public:
 	Planet(string name);
 	virtual ~Planet();
 	virtual void beAlive() = 0;
-	void save(ostream& s); ///Saving whole object into a file.
-	string getName();
+	virtual void save(ostream& s); ///Saving whole object into a file.
+	virtual void retrieve(ifstream& s, string filename); ///Retrieve whole object from a file.
+	virtual void show(); ///Display every value of the object
+	string getName(); ///return name of the object
 	friend ostream& operator<<(ostream& s, const Planet& p);
 protected:
 	std::string planetary_system;

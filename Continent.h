@@ -15,19 +15,21 @@ public:
 	~Continent();
 
 	static void showContinentsNumber();
-	void showCountriesNumber();
-	void showCountries();
-	void show();
+	void showCountriesNumber(ostream& s);
+	void showCountries(ostream &s);
+	void show(ostream& s);
+	void retrieve(istream& s);
 	void isCountry();
+	void sumProperties();
 
 	string name;
-	int area; //Sum of the countries' areas. Thousands of km^2.
-	int population; //Sum of the countries' populations. Millions of people
+	int area; ///Sum of the countries' areas. Thousands of km^2.
+	int population; ///Sum of the countries' populations. Millions of people
 	Country *GreatestCountries;
-	vector <Country*> GreatestCountriesVector; ///A vector of Greatest Countries instead of dynamically allocated table of pointers
+	vector <Country> GreatestCountriesVector; ///A vector of Greatest Countries instead of dynamically allocated table of pointers
 
-	operator int(); //Return continents_number;
-	void operator[](Country* newCountry);
+	operator int(); ///Return continents_number
+	void operator[](Country NewCountry);
 	void deleteCountry(); ///Delete a country from a continent
 
 private:

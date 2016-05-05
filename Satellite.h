@@ -10,7 +10,8 @@ public:
 	Satellite(string name, string role, string owner);
 	Satellite(string name, string role, string owner, int radius, int velocity, int initiation_year);
 	Satellite(const Satellite &s);
-	void show();
+	void show(ostream& s);
+	void retrieve(istream& s);
 	static void showNumberOfSatellites();
 	int findMin(int radius1, int radius2);
 	~Satellite(); 

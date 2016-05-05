@@ -9,9 +9,10 @@ public:
 	Country(const Country &c); ///copying constructor
 	~Country();
 
-	void show();
+	void show(ostream& s);
 	void ThereIsSatellite();
-	void ShowSatellite();
+	void ShowSatellite(ostream& s);
+	void retrieve(istream& s);
 	static void ShowCountriesNumber();
 
 	int population; ///Millions of people (10^6)

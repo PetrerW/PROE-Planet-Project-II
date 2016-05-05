@@ -66,19 +66,69 @@ Satellite::~Satellite()
 	satellites_number--;
 }
 
-void Satellite::show()
+void Satellite::show(ostream& s)
 {
 	if (this != NULL)
 	{
-		cout << "name: " << name << endl;
-		cout << "role: " << role << endl;
-		cout << "owner: " << owner << endl;
-		cout << "radius: " << radius << endl;
-		cout << "velocity: " << velocity << endl;
-		cout << "initiation year: " << initiation_year << endl << endl;
+		s << "Satellite beginning" << endl
+			<< "Satellite addres: " << this << endl
+			<< "Satellite name: " << name << endl
+			<< "Satellite role: " << role << endl
+			<< "Satellite owner: " << owner << endl
+			<< "Satellite radius: " << radius << endl
+			<< "Satellite velocity: " << velocity << endl
+			<< "Satellite initiation year: " << initiation_year << endl
+			<< "End of Satellite" << endl;
 	}
 	else
-		cout << "The Satellite object is a nullptr" << endl << endl;
+		s << "Satellite nullptr" << endl;
+}
+
+void Satellite::retrieve(istream & s)
+{
+	string line;
+	size_t find_in_line;
+	string keyWords[7] ={	"Satellite name: ",
+							"Satellite role: ",
+							"Satellite owner: ",
+							"Satellite radius: ",
+							"Satellite velocity: ",
+							"Satellite initiation year: ",
+							"End of Satellite"				};
+	///While loop is going to go through every element of this table and assign appropiate values.
+	bool satelliteEnd = false;
+	while (!satelliteEnd)
+	{
+		getline(s, line);
+			for (int i = 0; i < 7; i++) ///Checking if a keyWord is in the line
+			{
+				find_in_line = line.find(keyWords[i]); ///Index of the phrase we're looking for in the strings.
+				if (find_in_line != string::npos) ///The keyWord is in the line
+				{
+					///One of keyWords inscriptions found in the line
+					line.erase(find_in_line, keyWords[i].length());
+					switch (i)
+					{
+					case 0: ///"Satellite name: "
+						this->name = line; i = 7;  break;
+					case 1: ///"Satellite role: "
+						this->role = line; i = 7;  break;
+					case 2: ///"Satellite owner: "
+						this->owner = line; i = 7; break;
+					case 3: ///"Satellite radius: "
+						this->radius = atoi(line.c_str()); i = 7; break;
+					case 4: ///"Satellite velocity: "
+						this->velocity = atoi(line.c_str()); i = 7; break;
+					case 5: ///"Satellite initiation year: "
+						this->initiation_year = atoi(line.c_str()); i = 7;  break;
+					case 6: ///"End of Satellite"
+						satelliteEnd = true;  i = 7; break;
+					default: ///I expect going over endlines etc.
+						cout << "default... (satellite)" << endl; break;
+					}
+				}
+			}
+	}
 }
 
 int Satellite::findMin(int radius1, int radius2)

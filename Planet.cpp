@@ -23,6 +23,20 @@ void Planet::save(ostream & s)
 	s << (*this);
 }
 
+void Planet::retrieve(ifstream & s, string filename)
+{
+	///We don't need to retrieve the abstract class objects.
+	/*s.open(filename, ios::in);
+	getline(s, this->name);
+	getline(s, this->planetary_system);
+	s.close();*/
+}
+
+void Planet::show()
+{
+	cout << planetary_system << endl << name << endl;
+}
+
 string Planet::getName()
 {
 	return this->name;
@@ -30,6 +44,6 @@ string Planet::getName()
 
 ostream & operator<<(ostream& out, const Planet & p)
 {
-	out << p.planetary_system << endl << p.name << endl;
+	out << "Name: " << p.name << endl << "Planetary system: " << p.planetary_system << endl;
 	return out;
 }
